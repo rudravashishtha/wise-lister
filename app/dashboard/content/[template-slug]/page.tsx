@@ -36,7 +36,7 @@ function CreateContent(props: CONTENTPROPS) {
   const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
 
   const GenerateAIContent = async (formData: any) => {
-    if (totalUsage >= 1000) {
+    if (totalUsage >= 10000) {
       router.push("/dashboard/billing");
       return toast({
         title: "Credit Limit Exceeded",

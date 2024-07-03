@@ -1,8 +1,6 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 
-import "@toast-ui/editor/dist/toastui-editor.css";
-import { Editor } from "@toast-ui/react-editor";
 import { Copy } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/use-toast";
@@ -12,12 +10,6 @@ interface OUTPUTSECTIONPROPS {
 }
 
 function OutputSection({ output }: OUTPUTSECTIONPROPS) {
-  const editorRef: any = useRef();
-
-  useEffect(() => {
-    const editorInstance = editorRef.current.getInstance();
-    editorInstance.setMarkdown(output);
-  }, [output]);
 
   return (
     <div className="bg-white shadow-lg border rounded-lg">
@@ -36,13 +28,13 @@ function OutputSection({ output }: OUTPUTSECTIONPROPS) {
           Copy to Clipboard
         </Button>
       </div>
-      <Editor
-        ref={editorRef}
-        initialValue="Your result will be displayed here."
-        initialEditType="wysiwyg" // what you see is what you get
-        height="600px"
-        useCommandShortcut={true}
-      />
+      <div>
+        <div className="p-5">
+          <div className="h-96 overflow-y-auto">
+            <pre className="whitespace-pre-wrap">{output}</pre>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
