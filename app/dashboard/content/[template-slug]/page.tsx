@@ -15,6 +15,7 @@ import moment from "moment";
 import { TotalUsageContext } from "@/app/(context)/TotalUsageContext";
 import { toast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
+import { UpdateCreditUsageContext } from "@/app/(context)/UpdateCreditUsageContext";
 
 interface CONTENTPROPS {
   params: {
@@ -35,6 +36,10 @@ function CreateContent(props: CONTENTPROPS) {
 
   const { totalUsage, setTotalUsage } = useContext(TotalUsageContext);
 
+  const { updateCreditUsage, setUpdateCreditUsage } = useContext(
+    UpdateCreditUsageContext
+  );
+
   const GenerateAIContent = async (formData: any) => {
     if (totalUsage >= 10000) {
       router.push("/dashboard/billing");
@@ -53,6 +58,8 @@ function CreateContent(props: CONTENTPROPS) {
     setAiOuput(result.response.text());
     await SaveInDB(formData, selectedTemplate?.slug, result.response.text());
     setLoading(false);
+
+    setUpdateCreditUsage(Date.now());
   };
 
   const SaveInDB = async (
@@ -68,7 +75,7 @@ function CreateContent(props: CONTENTPROPS) {
       createdAt: moment().format("DD/MM/YYYY"),
     });
 
-    console.log(result);
+    // console.log(result);
   };
 
   return (

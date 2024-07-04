@@ -79,9 +79,9 @@ function SideNav() {
         </div>
       </div>
 
-      <div className="absolute bottom-10 left-0 w-full">
+      <div className="absolute left-0 w-full">
         <UsageTrack />
-      </div>
+      </div>  
 
       <LoadingBar color="#f11946" ref={loadingBarRef} />
     </div>
